@@ -15,6 +15,15 @@ loadEventListeners();
 function loadEventListeners() {
     // Add task event
     form.addEventListener('submit', addTask);
+
+    //remove task event
+    taskList.addEventListener('click', removeTask);
+
+    //clear tasks
+    clearBtn.addEventListener('click', clearTasks);
+
+    //filter tasks event
+    filter.addEventListener('keyup', filterTasks);
 }
 
 //Add Task
@@ -62,11 +71,68 @@ function addTask(e) {
       }
 
 
+      //clear tasks
+    function clearTasks() {
+        // one way to do it
+        // taskList.innerHTML = '';
+
+        //or loop through
+        // while(taskList.firstChild) {
+        //     taskList.removeChild(taskList.firstChild);
+        // }
+
+        while(taskList.firstChild) {
+            taskList.removeChild(taskList.firstChild);
+        }
+      }
+
+
+      //filter tasks
+
+      function filterTasks(e) {
+        const text = e.target.value.toLowerCase();
+        console.log(text);
+
+        document.querySelectorAll('.collection-item').forEach(function(task){
+            const item = task.firstChild.textContent;
+            if(item.toLowerCase().indexOf(text) != -1){
+                task.style.display = 'block';
+            } else {
+                task.style.display = 'none';
+            }
+        });
+      }
 
 
 
 
-      //EVENT BUBBLING
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//EVENT BUBBLING
 
 // document.querySelector('.card-title').addEventListener('click', function(){
 //   console.log('card-title')
@@ -90,10 +156,10 @@ function addTask(e) {
 //EVENT DELEGATION
 
 
-const deleteMe = document.querySelector('.delete-item secondary-content');
+// const deleteMe = document.querySelector('.delete-item secondary-content');
 
-deleteMe.addEventListener('click', deleteItem);
+// deleteMe.addEventListener('click', deleteItem);
 
-function deleteItem(){
-  console.log('delete item');
-}
+// function deleteItem(){
+//   console.log('delete item');
+// }

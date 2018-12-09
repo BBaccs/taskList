@@ -15,6 +15,12 @@ loadEventListeners();
 function loadEventListeners() {
     // Add task event
     form.addEventListener('submit', addTask);
+
+    //remove task
+    taskList.addEventListener('click', removeTask);
+
+    //clear tasks
+    clearBtn.addEventListener('click', clearTasks);
 }
 
 //Add Task
@@ -23,7 +29,7 @@ function addTask(e) {
         alert('Add a task');
     }
 
-    //create li elemnt
+    //create li element
     const li = document.createElement('li');
 
     //add a class
@@ -53,10 +59,21 @@ function addTask(e) {
    e.preventDefault();
 }   
     //remove task
-    function removeTask(e) {
-        if(e.target.parentElement.classList.contains('delete-item')) {
-          if(confirm('Are You Sure?')) {
-            e.target.parentElement.parentElement.remove();
-          }
+
+    function removeTask(e){
+        if (e.target.parentElement.classList.contains('delete-item')) {
+            if(confirm('are you sure')){
+                e.target.parentElement.parentElement.remove();
+            }
         }
-      }
+    }
+
+    function clearTasks(){
+        /* can do this but it's slower: 
+        taskList.innerHTML = ""; */
+
+        //while loop is faster:
+        while (taskList.firstChild) {
+            taskList.removeChild(taskList.firstChild);
+        }
+    }

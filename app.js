@@ -90,6 +90,10 @@ function addTask(e) {
 //EVENT DELEGATION
 
 
-function deleteItem() {
+const deleteMe = document.querySelector('.delete-item secondary-content');
+
+deleteMe.addEventListener('click', deleteItem);
+
+function deleteItem(){
   console.log('delete item');
 }
